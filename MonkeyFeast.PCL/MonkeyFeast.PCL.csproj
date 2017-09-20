@@ -35,6 +35,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Models\PlayPen.cs" />
+    <Compile Include="Sprites\SpriteSheet.cs" />
     <Compile Include="MonkeyFeastGameDraw.cs" />
     <Compile Include="MonkeyFeastGameUpdate.cs" />
     <Compile Include="MonkeyFeastGame.cs" />

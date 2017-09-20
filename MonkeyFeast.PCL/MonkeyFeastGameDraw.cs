@@ -22,15 +22,25 @@ namespace MonkeyFeast
 			GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 			
 			_spriteBatch.Begin ();
-		    _spriteBatch.Draw(_background, destinationRectangle: _screen);
 
-            //var v = font.MeasureString ("Game Over");
-            //spriteBatch.DrawString (font, "Game Over",
-            //	new Vector2 (GraphicsDevice.Viewport.Width - v.X - 30, 30),
-            //	Color.MonoGameOrange);
-            _spriteBatch.End ();
+		    _spriteBatch.Draw(_background, _screen, Color.White);
+            _monkey.Draw(_spriteBatch);
+
+            _spriteBatch.End();
 
 			base.Draw (gameTime);
 		}
+
+	    private void DrawRectangle(int width, int height, Color color)
+	    {
+	        var texture = new Texture2D(this.GraphicsDevice, width, height);
+	        Color[] colorData = new Color[width * height];
+	        for (int i = 0; i < (width * height); i++)
+	            colorData[i] = color;
+
+            texture.SetData<Color>(colorData);
+
+	        _spriteBatch.Draw(texture, _playPen.Rectangle, Color.OrangeRed);
+        }
     }
 }
