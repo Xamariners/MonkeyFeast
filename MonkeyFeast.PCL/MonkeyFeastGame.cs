@@ -19,22 +19,28 @@ namespace MonkeyFeast
 	public partial class MonkeyFeastGame : Game
 	{
 	    private GraphicsDeviceManager _graphics;
-        
+
+	    private PlayPen _playPen;
+
         SpriteBatch _spriteBatch;
 
         private Texture2D _background;
 
         private SpriteSheet _monkey;
 
-	    private PlayPen _playPen;
+	    private SpriteSheet _beer;
 	  
         SpriteFont _font;
 
-        SoundEffect fire;
+        SoundEffect _beerSound;
+
+	    private int _score = 0;
 
         private Rectangle _screen;
-		
-		public MonkeyFeastGame ()
+
+	    private bool _gameOver = true;
+
+	    public MonkeyFeastGame ()
 		{
             _graphics = new GraphicsDeviceManager(this)
 		    {
@@ -46,11 +52,15 @@ namespace MonkeyFeast
 
             Window.AllowUserResizing = true;
 
-		    _playPen = new PlayPen
+		    TouchPanel.EnabledGestures = GestureType.DoubleTap;
+
+            _playPen = new PlayPen
 		    {
 		        Rectangle = new Rectangle(290, 100, 550, 340),
-		        MonkeyPosition = 3
-		    };
+		        BeerColumn = new Random().Next(0, 5),
+		        MonkeyColumn = 3,
+		        BeerRow = -1
+            };
 		}
 
 	    protected override void LoadContent ()
@@ -60,17 +70,21 @@ namespace MonkeyFeast
 		    _background = Content.Load<Texture2D>("background");
 
             _font = Content.Load<SpriteFont> ("Font");
-            fire = Content.Load<SoundEffect>("fire");
+		    _beerSound = Content.Load<SoundEffect>("fire");
 
             _monkey = new SpriteSheet(Content, "monkeys", 1, 4, _playPen.MonkeyLocation());
 		    _monkey.Size = _playPen.CellWidth / _monkey.Width;
 
+		    _beer = new SpriteSheet(Content, "beers", 1, 4, _playPen.BeerLocation());
+		    _beer.Size = _playPen.CellWidth / _beer.Width;
+            
 		    _playPen.Monkey = _monkey;
+		    _playPen.Beer = _beer;
 		}
 
 	    protected override void UnloadContent()
 	    {
 	        Content.Unload();
 	    }
-    }
+	}
 }

@@ -14,9 +14,14 @@ namespace MonkeyFeast.PCL.Models
         private const int PLAYPEN_ROWS = 5;
 
         public Rectangle Rectangle { get; set; }
-        public int MonkeyPosition { get; set; }
+
+        public SpriteSheet Beer { get; set; }
+        public int BeerColumn { get; set; }
+        public int  BeerRow { get; set; }
 
         public SpriteSheet Monkey { get; set; }
+        public int MonkeyColumn { get; set; }
+        
 
         public int[,] EnnemyPosition = new int[PLAYPEN_COLUMNS, PLAYPEN_ROWS];
 
@@ -26,7 +31,12 @@ namespace MonkeyFeast.PCL.Models
         public Vector2 MonkeyLocation()
         { 
             var monkeyHeight = Monkey?.Height ?? 130;
-            return new Vector2(Rectangle.X + (CellWidth * MonkeyPosition-1), Rectangle.Bottom - monkeyHeight);
+            return new Vector2(Rectangle.X + (CellWidth * MonkeyColumn-1), Rectangle.Bottom - monkeyHeight);
+        }
+
+        public Vector2 BeerLocation()
+        {
+            return new Vector2(Rectangle.X + (CellWidth * BeerColumn-1), Rectangle.Top + (BeerRow*CellHeight));
         }
     }
 }

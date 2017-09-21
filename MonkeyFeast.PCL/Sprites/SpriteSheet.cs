@@ -63,6 +63,7 @@ namespace MonkeyFeast.PCL.Sprites
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             var sourceRectangle = new Rectangle(_width*Column,_height*Row, _width, _height);
+
             var destinationRectangle = new Rectangle((int)Location.X, (int)Location.Y,
                 (int)Width, (int)Height);
             

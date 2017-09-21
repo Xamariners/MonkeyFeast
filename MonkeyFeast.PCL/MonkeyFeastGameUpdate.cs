@@ -21,19 +21,21 @@ namespace MonkeyFeast
 	    private int _currentFrame;
 	    private readonly int _totalFrames;
         private int _timeSinceLastFrame;
-	    private const int MS_PER_FRAME = 200;
+	    private int _timeSinceLastBeerFrame;
+        private const int MS_PER_FRAME = 200;
+	    private int _beerMSPerFrame = 1000;
 
-
-	    protected override void Update (GameTime gameTime)
+        protected override void Update (GameTime gameTime)
         {
+            _screen = new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+
             _timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+
             if (_timeSinceLastFrame > MS_PER_FRAME)
             {
                 _timeSinceLastFrame -= MS_PER_FRAME;
-
-                _screen = new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
-                    GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
-
+              
                 KeyUpdate(gameTime);
 
                 TouchUpdate(gameTime);
@@ -41,16 +43,29 @@ namespace MonkeyFeast
                 _timeSinceLastFrame = 0;
             }
 
+            BeerUpdate(gameTime);
+
             base.Update(gameTime);
         }
+
+	    private void BeerUpdate(GameTime gameTime)
+	    {
+	        if (_gameOver)
+	            return;
+
+	        _timeSinceLastBeerFrame += gameTime.ElapsedGameTime.Milliseconds;
+
+	        if (_timeSinceLastBeerFrame > _beerMSPerFrame)
+	        {
+                BeerMoves(gameTime);
+	            _timeSinceLastBeerFrame = 0;
+	        }
+	    }
 
 	    private void KeyUpdate(GameTime gameTime)
 	    {
 	        var keyboardState = Keyboard.GetState();
 	        var gamePadState = GamePad.GetState(PlayerIndex.One);
-
-	        //if (!(_previousKeyboardState != keyboardState || _previousGamePadState != gamePadState))
-	        //    return;
 
             if (keyboardState.IsKeyDown(Keys.Left) || gamePadState.ThumbSticks.Right.X < 0f)
 	        {
@@ -61,21 +76,15 @@ namespace MonkeyFeast
 	        {
 	            MonkeyGoesRight(gameTime);
             }
-
-	        if (keyboardState.IsKeyDown(Keys.Space) || gamePadState.IsButtonDown(Buttons.A))
-	        {
-	            fire.Play();
-	        }
         }
 
 	    private void TouchUpdate(GameTime gameTime)
 	    {
 	        var touchState = TouchPanel.GetState();
-	        //var previousTouchState = new Vector2();
-
+	      
 	        foreach (var touch in touchState)
 	        {
-	            if (touch.State != TouchLocationState.Released) //&& touch.Position != previousTouchState
+	            if (touch.State != TouchLocationState.Released)
                 {
 	                if (touch.Position.X < (TouchPanel.DisplayWidth / 2))
 	                {
@@ -87,41 +96,87 @@ namespace MonkeyFeast
 	                    MonkeyGoesRight(gameTime);
                     }
 	            }
-
-	            //previousTouchState = touch.Position;
 	        }
 
 	        while (TouchPanel.IsGestureAvailable)
 	        {
 	            var gesture = TouchPanel.ReadGesture();
-	            if (gesture.GestureType == GestureType.DoubleTap)
+	            if (_gameOver && gesture.GestureType == GestureType.DoubleTap)
 	            {
-	                fire.Play();
+	                StartGame();
 	            }
 	        }
         }
 
+	    private void StartGame()
+	    {
+	        _gameOver = false;
+	        _score = 0;
+	        _playPen.BeerColumn = new Random().Next(0, 5);
+	        _playPen.MonkeyColumn = 3;
+            _playPen.BeerRow = -1;
+        }
+
         private void MonkeyGoesLeft(GameTime gameTime)
 	    {
-	        if (_playPen.MonkeyPosition > 0)
+	        if (_gameOver)
+	            return;
+
+            if (_playPen.MonkeyColumn > 0)
 	        {
 	            _monkey.Location = new Vector2(_monkey.Location.X - _monkey.Width, _monkey.Location.Y);
-	            _playPen.MonkeyPosition--;
+	            _playPen.MonkeyColumn--;
 	        }
-
 
 	        _monkey.Update(gameTime);
         }
 
 	    private void MonkeyGoesRight(GameTime gameTime)
 	    {
-	        if (_playPen.MonkeyPosition < 4)
+	        if (_gameOver)
+	            return;
+
+            if (_playPen.MonkeyColumn < 4)
 	        {
 	            _monkey.Location = new Vector2(_monkey.Location.X + _monkey.Width, _monkey.Location.Y);
-	            _playPen.MonkeyPosition++;
+	            _playPen.MonkeyColumn++;
 	        }
 
 	        _monkey.Update(gameTime);
+        }
+
+	    private void BeerMoves(GameTime gameTime)
+	    {
+	        if (_playPen.BeerRow < 3)
+	        {
+                _playPen.BeerRow++;
+	            _beerSound.Play();
+            }
+
+	        else if (_playPen.BeerRow < 4)
+	        {
+	            if (_playPen.MonkeyColumn == _playPen.BeerColumn)
+	            {
+                    // add points
+	                _score++;
+	                _playPen.BeerColumn = new Random().Next(0, 5);
+	                _playPen.BeerRow = 0;
+	            }
+	            else
+	            {
+	                _playPen.BeerRow++;
+	                _beerSound.Play();
+                }
+	        }
+
+	        else if (_playPen.BeerRow >= 4)
+	        {
+	            this._gameOver = true;
+	        }
+
+	        _beer.Location = _playPen.BeerLocation();
+
+            _beer.Update(gameTime);
         }
     }
 }
