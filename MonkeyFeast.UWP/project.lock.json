@@ -24362,12 +24362,12 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\ben\\Xamariners\\Developers - Documents\\MonkeyFest\\Sessions\\MonkeyGoingBananasWithMonoGame\\MonkeyFeast\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
+      "projectUniqueName": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
       "projectName": "MonkeyFeast.UWP",
-      "projectPath": "C:\\Users\\ben\\Xamariners\\Developers - Documents\\MonkeyFest\\Sessions\\MonkeyGoingBananasWithMonoGame\\MonkeyFeast\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
-      "projectJsonPath": "C:\\Users\\ben\\Xamariners\\Developers - Documents\\MonkeyFest\\Sessions\\MonkeyGoingBananasWithMonoGame\\MonkeyFeast\\MonkeyFeast.UWP\\project.json",
+      "projectPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
+      "projectJsonPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\project.json",
       "packagesPath": "C:\\Users\\ben\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ben\\Xamariners\\Developers - Documents\\MonkeyFest\\Sessions\\MonkeyGoingBananasWithMonoGame\\MonkeyFeast\\MonkeyFeast.UWP\\obj\\",
+      "outputPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
         "C:\\Users\\ben\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -24375,13 +24375,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Users\\ben\\.dotnet\\NuGetFallbackFolder": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "uap10.0.10240": {
           "projectReferences": {
-            "C:\\Users\\ben\\Xamariners\\Developers - Documents\\MonkeyFest\\Sessions\\MonkeyGoingBananasWithMonoGame\\MonkeyFeast\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj": {
-              "projectPath": "C:\\Users\\ben\\Xamariners\\Developers - Documents\\MonkeyFest\\Sessions\\MonkeyGoingBananasWithMonoGame\\MonkeyFeast\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj"
+            "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj": {
+              "projectPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj"
             }
           }
         }

@@ -39,7 +39,7 @@ namespace MonkeyFeast
 	    private void DrawScore()
 	    {
 	        _spriteBatch.DrawString(_font, _score.ToString(),
-                new Vector2(_playPen.Rectangle.Left + 20, _playPen.Rectangle.Top + 20),
+                new Vector2(_playPen.Area.Left + (20 * _scale), _playPen.Area.Top + (20 * _scale)),
 	            Color.MonoGameOrange);
         }
 
@@ -50,7 +50,7 @@ namespace MonkeyFeast
 
 	        var gameOver = "GAME OVER";
 	        _spriteBatch.DrawString(_font, gameOver,
-	            new Vector2(_playPen.Rectangle.Center.X - 100, _playPen.Rectangle.Center.Y),
+	            new Vector2(_playPen.Area.Center.X - (100 * _scale), _playPen.Area.Center.Y),
                 Color.MonoGameOrange);
 	    }
 
@@ -63,7 +63,7 @@ namespace MonkeyFeast
 
             texture.SetData<Color>(colorData);
 
-	        _spriteBatch.Draw(texture, _playPen.Rectangle, Color.OrangeRed);
+	        _spriteBatch.Draw(texture, _playPen.Area, Color.OrangeRed);
         }
     }
 }

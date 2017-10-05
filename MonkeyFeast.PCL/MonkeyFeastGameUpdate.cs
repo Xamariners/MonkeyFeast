@@ -13,34 +13,27 @@ namespace MonkeyFeast
 	/// This is the main type for your game.
 	/// </summary>
 	public partial class MonkeyFeastGame : Game
-	{
-	    private Vector2 _monkeyLocation;
-	    private KeyboardState _previousKeyboardState;
-	    private GamePadState _previousGamePadState;
-
-	    private int _currentFrame;
-	    private readonly int _totalFrames;
-        private int _timeSinceLastFrame;
+	{  
+        private int _timeSinceLastGameFrame;
 	    private int _timeSinceLastBeerFrame;
-        private const int MS_PER_FRAME = 200;
+
+
+        private const int _gameMSPerFrame = 200;
 	    private int _beerMSPerFrame = 1000;
 
         protected override void Update (GameTime gameTime)
         {
-            _screen = new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
-                GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
+            _timeSinceLastGameFrame += gameTime.ElapsedGameTime.Milliseconds;
 
-            _timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-
-            if (_timeSinceLastFrame > MS_PER_FRAME)
+            if (_timeSinceLastGameFrame > _gameMSPerFrame)
             {
-                _timeSinceLastFrame -= MS_PER_FRAME;
+                _timeSinceLastGameFrame -= _gameMSPerFrame;
               
                 KeyUpdate(gameTime);
 
                 TouchUpdate(gameTime);
 
-                _timeSinceLastFrame = 0;
+                _timeSinceLastGameFrame = 0;
             }
 
             BeerUpdate(gameTime);
@@ -68,14 +61,14 @@ namespace MonkeyFeast
 	        var gamePadState = GamePad.GetState(PlayerIndex.One);
 
             if (keyboardState.IsKeyDown(Keys.Left) || gamePadState.ThumbSticks.Right.X < 0f)
-	        {
 	            MonkeyGoesLeft(gameTime);
-	        }
 
 	        if (keyboardState.IsKeyDown(Keys.Right) || gamePadState.ThumbSticks.Right.X > 0f)
-	        {
 	            MonkeyGoesRight(gameTime);
-            }
+
+	        if (keyboardState.IsKeyDown(Keys.Space))
+                StartGame();
+                
         }
 
 	    private void TouchUpdate(GameTime gameTime)
