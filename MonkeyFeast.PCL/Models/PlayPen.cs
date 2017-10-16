@@ -35,10 +35,8 @@ namespace MonkeyFeast.PCL.Models
 
         public Vector2 MonkeyLocation()
         { 
-            var monkeyHeight = Monkey.Height * _scale;
-
             // we draw from top to bottom / left to right
-            return new Vector2(Area.X + (CellWidth * MonkeyColumn - 1), Area.Bottom - monkeyHeight);
+            return new Vector2(Area.X + (CellWidth * MonkeyColumn - 1), Area.Bottom - Monkey.Height);
         }
 
         public Vector2 BeerLocation()

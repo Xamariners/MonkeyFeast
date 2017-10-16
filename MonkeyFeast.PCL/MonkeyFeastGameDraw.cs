@@ -27,7 +27,9 @@ namespace MonkeyFeast
             _monkey.Draw(_spriteBatch);
 		    _beer.Draw(_spriteBatch);
 
-		    DrawScore();
+		    //DrawRectangle(_playPen.Area.Width, _playPen.Area.Height, Color.Red);
+
+            DrawScore();
 
 		    DrawGameOver();
 
@@ -39,7 +41,7 @@ namespace MonkeyFeast
 	    private void DrawScore()
 	    {
 	        _spriteBatch.DrawString(_font, _score.ToString(),
-                new Vector2(_playPen.Area.Left + (20 * _scale), _playPen.Area.Top + (20 * _scale)),
+                new Vector2(_playPen.Area.Left + (30 * _scale), _playPen.Area.Top + (20 * _scale)),
 	            Color.MonoGameOrange);
         }
 
@@ -50,7 +52,7 @@ namespace MonkeyFeast
 
 	        var gameOver = "GAME OVER";
 	        _spriteBatch.DrawString(_font, gameOver,
-	            new Vector2(_playPen.Area.Center.X - (100 * _scale), _playPen.Area.Center.Y),
+	            new Vector2(_playPen.Area.Center.X - (30 * _scale), _playPen.Area.Center.Y),
                 Color.MonoGameOrange);
 	    }
 

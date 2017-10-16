@@ -21,7 +21,7 @@ namespace MonkeyFeast
 	/// </summary>
 	public partial class MonkeyFeastGame : Game
 	{
-	    private GraphicsDeviceManager _graphics;
+	    private readonly GraphicsDeviceManager _graphics;
 
 	    private PlayPen _playPen;
 
@@ -52,11 +52,13 @@ namespace MonkeyFeast
 		{
             _graphics = new GraphicsDeviceManager(this)
 		    {
-		        IsFullScreen = true,
+		        IsFullScreen = false,
 		        SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight,
+                //PreferredBackBufferHeight = 600,
+                //PreferredBackBufferWidth = 800
 		    };
 
-            Window.AllowUserResizing = true;
+            Window.AllowUserResizing = false;
 
 		    TouchPanel.EnabledGestures = GestureType.DoubleTap;
 
@@ -76,14 +78,8 @@ namespace MonkeyFeast
 
 	        _scale = (float)_screen.Height / (float)_bounds.Height;
 
-            _playPen = new PlayPen(_scale)
-	        {
-	            Area = new RectangleF(192 * _scale, 82 * _scale, 386 * _scale, 256 * _scale).ToRectangle(),
-	            BeerColumn = new Random().Next(0, 5),
-	            MonkeyColumn = 3,
-	            BeerRow = -1
-	        };
-
+            StartGame(true);
+        
             _font = Content.Load<SpriteFont> ("Font");
 		    _beerSound = Content.Load<SoundEffect>("fire");
 

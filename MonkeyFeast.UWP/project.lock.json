@@ -24358,31 +24358,30 @@
     "UAP,Version=v10.0.10240": []
   },
   "packageFolders": {
-    "C:\\Users\\ben\\.nuget\\packages\\": {}
+    "C:\\Users\\BenIshiyama-Levy\\.nuget\\packages\\": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
+      "projectUniqueName": "C:\\Work\\Xamariners\\OpenSource\\MonkeyFeast\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
       "projectName": "MonkeyFeast.UWP",
-      "projectPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
-      "projectJsonPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\project.json",
-      "packagesPath": "C:\\Users\\ben\\.nuget\\packages\\",
-      "outputPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.UWP\\obj\\",
+      "projectPath": "C:\\Work\\Xamariners\\OpenSource\\MonkeyFeast\\MonkeyFeast.UWP\\MonkeyFeast.UWP.csproj",
+      "projectJsonPath": "C:\\Work\\Xamariners\\OpenSource\\MonkeyFeast\\MonkeyFeast.UWP\\project.json",
+      "packagesPath": "C:\\Users\\BenIshiyama-Levy\\.nuget\\packages\\",
+      "outputPath": "C:\\Work\\Xamariners\\OpenSource\\MonkeyFeast\\MonkeyFeast.UWP\\obj\\",
       "projectStyle": "ProjectJson",
       "configFilePaths": [
-        "C:\\Users\\ben\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BenIshiyama-Levy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\ben\\.dotnet\\NuGetFallbackFolder": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "uap10.0.10240": {
           "projectReferences": {
-            "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj": {
-              "projectPath": "C:\\Work\\Xamariners\\Meetup\\GoingBananas\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj"
+            "C:\\Work\\Xamariners\\OpenSource\\MonkeyFeast\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj": {
+              "projectPath": "C:\\Work\\Xamariners\\OpenSource\\MonkeyFeast\\MonkeyFeast.PCL\\MonkeyFeast.PCL.csproj"
             }
           }
         }

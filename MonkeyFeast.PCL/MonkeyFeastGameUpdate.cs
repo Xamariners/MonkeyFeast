@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 using Microsoft.Xna.Framework.Media;
+using MonkeyFeast.PCL.Models;
+using MonoGame.Extended;
 
 namespace MonkeyFeast
 {
@@ -16,13 +18,14 @@ namespace MonkeyFeast
 	{  
         private int _timeSinceLastGameFrame;
 	    private int _timeSinceLastBeerFrame;
+	    private const int BEER_SPEED = 1000;
 
 
         private const int _gameMSPerFrame = 200;
-	    private int _beerMSPerFrame = 1000;
+	    private int _beerMSPerFrame = BEER_SPEED;
 
         protected override void Update (GameTime gameTime)
-        {
+        {   
             _timeSinceLastGameFrame += gameTime.ElapsedGameTime.Milliseconds;
 
             if (_timeSinceLastGameFrame > _gameMSPerFrame)
@@ -66,7 +69,7 @@ namespace MonkeyFeast
 	        if (keyboardState.IsKeyDown(Keys.Right) || gamePadState.ThumbSticks.Right.X > 0f)
 	            MonkeyGoesRight(gameTime);
 
-	        if (keyboardState.IsKeyDown(Keys.Space))
+	        if (_gameOver && keyboardState.IsKeyDown(Keys.Space))
                 StartGame();
                 
         }
@@ -97,17 +100,34 @@ namespace MonkeyFeast
 	            if (_gameOver && gesture.GestureType == GestureType.DoubleTap)
 	            {
 	                StartGame();
-	            }
+	                _monkey.Location = _playPen.MonkeyLocation();
+                }
 	        }
         }
 
-	    private void StartGame()
-	    {
-	        _gameOver = false;
+	    private void StartGame(bool isGameOver = false)
+	    {  
 	        _score = 0;
-	        _playPen.BeerColumn = new Random().Next(0, 5);
-	        _playPen.MonkeyColumn = 3;
-            _playPen.BeerRow = -1;
+	        _beerMSPerFrame = BEER_SPEED;
+
+            _playPen = new PlayPen(_scale)
+	        {
+	            Area = new RectangleF(200 * _scale, 82 * _scale, 420 * _scale, 256 * _scale).ToRectangle(),
+                BeerColumn = new Random().Next(0, 5),
+	            MonkeyColumn = 2,
+	            BeerRow = 0
+	        };
+
+	        if (!isGameOver && _monkey != null)
+	        {
+                // resets sprites position
+	            _playPen.Beer = _beer;
+	            _playPen.Monkey = _monkey;
+                _monkey.Location = _playPen.MonkeyLocation();
+	            _beer.Location = _playPen.BeerLocation();
+	        }
+
+	        _gameOver = isGameOver;
         }
 
         private void MonkeyGoesLeft(GameTime gameTime)
@@ -154,11 +174,14 @@ namespace MonkeyFeast
 	                _score++;
 	                _playPen.BeerColumn = new Random().Next(0, 5);
 	                _playPen.BeerRow = 0;
-	            }
+
+                    if(_beerMSPerFrame > 400)
+	                    _beerMSPerFrame = _beerMSPerFrame - 100;
+                }
 	            else
 	            {
 	                _playPen.BeerRow++;
-	                _beerSound.Play();
+                    _beerSound.Play();
                 }
 	        }
 

@@ -47,8 +47,11 @@ namespace MonkeyFeast.PCL.Sprites
             Size = size;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, int? currentCell = null)
         {
+            if (currentCell.HasValue)
+                _currentCell = currentCell.Value;
+
             Row = _currentCell / Columns;
             Column = _currentCell % Columns;
 

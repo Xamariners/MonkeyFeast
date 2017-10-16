@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonkeyFeast.Desktop", "MonkeyFeast.Desktop\MonkeyFeast.Desktop.csproj", "{A90AD40C-D181-4482-B631-E8ACA2D245B7}"
 EndProject
@@ -13,6 +13,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonkeyFeast.PCL", "MonkeyFeast.PCL\MonkeyFeast.PCL.csproj", "{39A83F74-EAEF-4412-847F-9246709C492E}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "MonkeyFeast.Shared", "MonkeyFeast.Shared\MonkeyFeast.Shared.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hosts", "Hosts", "{226CA38B-DBBE-461E-8618-4DD5A2F91332}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -319,6 +321,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A90AD40C-D181-4482-B631-E8ACA2D245B7} = {226CA38B-DBBE-461E-8618-4DD5A2F91332}
+		{6F2394C8-234D-43F1-81D6-C5E02F63FABB} = {226CA38B-DBBE-461E-8618-4DD5A2F91332}
+		{B4AAD332-D35C-4C99-81B6-9569ABBCFB1D} = {226CA38B-DBBE-461E-8618-4DD5A2F91332}
+		{F81DAF1A-69A5-4696-BBE5-990110A81501} = {226CA38B-DBBE-461E-8618-4DD5A2F91332}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF70D72C-4329-4071-8443-5965FD1AB120}
